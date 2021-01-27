@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.oneToMore.EmployeeDao">
+
+    <select id="selectAllById" parameterType="int" resultType="com.qfedu.oneToMore.Employee">
+        select * from employee where id = #{id}
+    </select>
+
+    <resultMap id="empMap" type="com.qfedu.oneToMore.Employee">
+        <id column="id" property="id"></id>
+        <result column="ename" property="ename"></result>
+        <association property="dept" resultMap="com.qfedu.oneToMore.DepartmentDao.depMap0"></association>
+    </resultMap>
+    <select id="select1" parameterType="int" resultMap="empMap">
+        select * from employee e inner join department d on e.deptId = d.id where e.id = #{id}
+    </select>
+</mapper>
