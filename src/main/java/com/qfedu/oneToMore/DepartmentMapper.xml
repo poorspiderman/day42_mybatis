@@ -3,8 +3,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qfedu.oneToMore.DepartmentDao">
     <resultMap id="depMap0" type="com.qfedu.oneToMore.Department">
-        <id column="id" property="id"></id>
+        <id column="did" property="did"></id>
         <result column="dname" property="dname"></result>
     </resultMap>
+    <select id="selectDeptByDid" parameterType="int" resultType="com.qfedu.oneToMore.Department">
+        select * from department where did = #{did}
+    </select>
 
+    <select id="findEmpByDid" parameterType="int" resultMap="deptMap1">
+        select * from department d inner join employee e on d.did=e.deptId where d.did=#{did}
+    </select>
+    <resultMap id="deptMap1" type="com.qfedu.oneToMore.Department">
+        <id column="did" property="did"></id>
+        <result column="dname" property="dname"></result>
+        <collection property="employeeList" javaType="list" ofType="com.qfedu.oneToMore.Employee">
+            <id column="eid" property="eid"></id>
+            <result column="ename" property="ename"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findEmpByDid2" parameterType="int" resultMap="deptMap2">
+        select * from department where did = #{did}
+    </select>
+    <resultMap id="deptMap2" type="com.qfedu.oneToMore.Department">
+        <id column="did" property="did"></id>
+        <result column="dname" property="dname"></result>
+        <collection property="employeeList" javaType="list" ofType="com.qfedu.oneToMore.Employee"
+                    column="did" select="com.qfedu.oneToMore.EmployeeDao.selectEmpByDeptId">
+
+        </collection>
+    </resultMap>
+
+    <select id="findEmpByDid3" parameterType="int" resultMap="deptMap3">
+        select * from employee e inner join department d on e.deptId = d.did where d.did = #{did}
+    </select>
+    <resultMap id="deptMap3" type="com.qfedu.oneToMore.Department">
+        <id column="did" property="did"></id>
+        <result column="dname" property="dname"></result>
+        <collection property="employeeList" javaType="list" ofType="com.qfedu.oneToMore.Employee"
+                    resultMap="com.qfedu.oneToMore.EmployeeDao.empMap">
+
+        </collection>
+    </resultMap>
 </mapper>

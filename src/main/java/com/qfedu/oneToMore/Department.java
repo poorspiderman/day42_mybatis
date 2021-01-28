@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Department {
 
-    private Integer id;
+    private Integer did;
 
     private String dname;
 
     private List<Employee> employeeList;
 
-    public Integer getId() {
-        return id;
+    public Integer getDid() {
+        return did;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDid(Integer did) {
+        this.did = did;
     }
 
     public String getDname() {
@@ -37,7 +37,7 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
+                "did=" + did +
                 ", dname='" + dname + '\'' +
                 ", employeeList=" + employeeList +
                 '}';

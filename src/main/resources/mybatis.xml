@@ -20,5 +20,6 @@
     <mappers>
         <mapper resource="com/qfedu/oneToMore/EmployeeMapper.xml"></mapper>
         <mapper resource="com/qfedu/oneToMore/DepartmentMapper.xml"></mapper>
+        <mapper resource="com/qfedu/moreToMore/StudentMapper.xml"></mapper>
     </mappers>
 </configuration>

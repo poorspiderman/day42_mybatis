@@ -4,15 +4,33 @@
 <mapper namespace="com.qfedu.oneToMore.EmployeeDao">
 
     <select id="selectAllById" parameterType="int" resultType="com.qfedu.oneToMore.Employee">
-        select * from employee where id = #{id}
+        select * from employee where eid = #{eid}
     </select>
 
-    <resultMap id="empMap" type="com.qfedu.oneToMore.Employee">
-        <id column="id" property="id"></id>
+    <select id="select1" parameterType="int" resultMap="empMap1">
+        select * from employee e inner join department d on e.deptId = d.did where e.eid = #{eid}
+    </select>
+    <resultMap id="empMap1" type="com.qfedu.oneToMore.Employee">
+        <id column="eid" property="eid"></id>
         <result column="ename" property="ename"></result>
         <association property="dept" resultMap="com.qfedu.oneToMore.DepartmentDao.depMap0"></association>
     </resultMap>
-    <select id="select1" parameterType="int" resultMap="empMap">
-        select * from employee e inner join department d on e.deptId = d.id where e.id = #{id}
+
+    <select id="selectByEid" parameterType="int" resultMap="empMap2">
+        select * from employee where eid = #{eid}
     </select>
+    <resultMap id="empMap2" type="com.qfedu.oneToMore.Employee">
+        <id column="eid" property="eid"></id>
+        <result column="ename" property="ename"></result>
+        <association property="dept" column="deptId" select="com.qfedu.oneToMore.DepartmentDao.selectDeptByDid"></association>
+    </resultMap>
+
+    <select id="selectEmpByDeptId" parameterType="int" resultType="com.qfedu.oneToMore.Employee">
+        select * from employee where deptId = #{did}
+    </select>
+
+    <resultMap id="empMap" type="com.qfedu.oneToMore.Employee">
+        <id column="eid" property="eid"></id>
+        <result column="ename" property="ename"></result>
+    </resultMap>
 </mapper>

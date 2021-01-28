@@ -1,16 +1,16 @@
 package com.qfedu.oneToMore;
 
 public class Employee {
-    private Integer id;
+    private Integer eid;
     private String ename;
     private Department dept;
 
-    public Integer getId() {
-        return id;
+    public Integer getEid() {
+        return eid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEid(Integer eid) {
+        this.eid = eid;
     }
 
     public String getEname() {
@@ -32,7 +32,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
+                "eid=" + eid +
                 ", ename='" + ename + '\'' +
                 ", dept=" + dept +
                 '}';

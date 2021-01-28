@@ -37,7 +37,17 @@ public class Demo1 {
         sqlSession.close();
     }
 
+    public static void selectById(){
+        SqlSession sqlSession = factory.openSession();
+        EmployeeDao mapper = sqlSession.getMapper(EmployeeDao.class);
+        Employee employee = mapper.selectByEid(2);
+        System.out.println(employee.getDept().getDname());
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
     public static void main(String[] args) {
-        select1();
+        //select1();
+        selectById();
     }
 }
