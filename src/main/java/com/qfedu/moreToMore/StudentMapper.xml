@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qfedu.moreToMore.StudentDao">
+    <select id="findCourseBySid" parameterType="int" resultMap="stuMap1">
+        select s.*,c.* from t_student s
+        inner join t_relation r on s.sid = r.sid
+        inner join t_course c on r.cid = c.cid
+        where s.sid = #{sid}
+    </select>
+    <resultMap id="stuMap1" type="com.qfedu.moreToMore.Student">
+        <id column="sid" property="sid"></id>
+        <result column="sname" property="sname"></result>
+        <collection property="studentList" javaType="list" ofType="com.qfedu.moreToMore.Course">
+            <id column="cid" property="cid"></id>
+            <result column="cname" property="cname"></result>
+        </collection>
+    </resultMap>
+</mapper>
